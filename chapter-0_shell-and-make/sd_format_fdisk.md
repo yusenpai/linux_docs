@@ -24,7 +24,7 @@ Mỗi phân vùng được đánh dấu bởi điểm đầu và điểm cuối:
 
 Đầu tiên ta tìm xem device nào tương ứng với thẻ nhớ SD. Dùng lệnh `lsblk` để liệt kê toàn bộ block device:
 
-```sh
+```
 parallels@ubuntu-linux-22-04-desktop:~/u-boot$ lsblk
 NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
 ...
@@ -42,7 +42,7 @@ sr0     11:0    1  1024M  0 rom
 
 Sau khi xác định được device của thẻ SD, dùng lệnh `sudo fdisk /dev/sdX`:
 
-```sh
+```
 parallels@ubuntu-linux-22-04-desktop:~/u-boot$ sudo fdisk /dev/sdb
 Welcome to fdisk (util-linux 2.37.2).
 Changes will remain in memory only, until you decide to write them.
@@ -76,7 +76,7 @@ Sau khi xoá xong, dùng lệnh `sudo fdisk /dev/sdX` để quay lại fdisk. Th
 	
 	Ví dụ: tạo phân vùng 1, kích thước 50M, bắt đầu từ vị trí 20M trong thẻ nhớ:
 
-	```sh
+	```
 	Command (m for help): n
 	Partition type
 	p   primary (0 primary, 0 extended, 4 free)
@@ -92,7 +92,7 @@ Sau khi xoá xong, dùng lệnh `sudo fdisk /dev/sdX` để quay lại fdisk. Th
 	First sector là 40960 vì mỗi sector là 512 byte, 40960 x 512 byte = 20Mbyte. Last sector có thể ghi +50M, fdisk sẽ tự tính toán last sector.
 - t: Đổi loại định dạng cho phân vùng từ Linux thành FAT32:
 
-	```sh
+	```
 	Command (m for help): t
 	Selected partition 1
 	Hex code or alias (type L to list all): c
@@ -102,7 +102,7 @@ Sau khi xoá xong, dùng lệnh `sudo fdisk /dev/sdX` để quay lại fdisk. Th
 	Như vậy là hoàn tất tạo phân vùng. Làm tương tự để tạo phân vùng 2 ngay kế tiếp phân vùng 1. Phân vùng 2 để định dạng là ext4 (Linux). 
 	Bước Last sector có thể để mặc định thì fdisk tự động lấy toàn bộ sector còn lại cho phân vùng 2:
 
-	```sh
+	```
 	Command (m for help): n
 	Partition type
 	p   primary (1 primary, 0 extended, 3 free)
@@ -131,7 +131,7 @@ Sau khi xoá xong, dùng lệnh `sudo fdisk /dev/sdX` để quay lại fdisk. Th
   
 Lúc này thẻ SD đã có 2 phân vùng, một phân vùng FAT32 dành cho boot, phân vùng ext4 chứa root-filesytem. Ta định dạng các phân vùng bằng cách lệnh sau:
 
-```sh
+```
 mkfs.vfat -F 32 /dev/sdX1
 mkfs.ext4 /dev/sdX2
 ```
@@ -140,7 +140,7 @@ mkfs.ext4 /dev/sdX2
 
 Giả sử thẻ SD sau định dạng có bảng phân vùng như sau:
 
-```sh
+```
 Device     Boot  Start        End    Sectors Size Id Type
 /dev/sdb1        40960     143359     102400  50M  c W95 FAT32 (LBA)
 /dev/sdb2       143360 4294967295 4294823936   2T 83 Linux
@@ -151,7 +151,7 @@ Device     Boot  Start        End    Sectors Size Id Type
 
 Trong đó còn một phân vùng không được đánh dấu, từ sector 0 (0M) tới sector 40959 (20M). Phân vùng này thường được để dành cho bootloader của board. Muốn ghi vào phân vùng này ta dùng lệnh `dd`. Ví dụ:
 
-```sh
+```
 sudo dd if=hello.txt of=/dev/sdX bs=1k seek=100
 ```
 

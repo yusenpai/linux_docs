@@ -22,7 +22,7 @@ Gồm 3 bước thực hiện:
 2. Chọn thẻ SD
 3. Bắt đầu ghi
 
-![alt text](<Screenshot 2025-04-19 at 22.19.06.png>)
+![alt text](<./assets/Screenshot 2025-04-19 at 22.19.06.png>)
 
 ## Ví dụ: Tạo thẻ SD chứa hệ điều hành Raspberry Pi OS.
 

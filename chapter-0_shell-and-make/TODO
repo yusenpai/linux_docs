@@ -1,0 +1,32 @@
+0. Những lệnh cơ bản:
+	Cơ bản: echo,ls,cd,pwd,mkdir,rm,cp,mv
+	Quyền hạn: chown, chmod
+
+1. Ngoài những lệnh cơ bản, cần phải học những lệnh sau
+	ls -1, ls -l, ls -a
+	grep
+	export
+	còn tiếp...
+
+2. Học các tool nâng cao:
+	fdisk: tới mức có thể tự format thẻ sd
+	dd: tới mức cơ bản
+
+3. Học sử dụng các text editor:
+	nano hoặc vim
+	touch
+
+4. Sử dụng ~/bashrc: thực thi các lệnh khi vừa mở terminal
+
+5. Sử dụng package manager: apt, git
+	apt install
+	apt update
+	apt uninstall
+	git clone
+	wget
+
+6. Sử dụng lệnh lsblk, mount, umount để gắn, gỡ thẻ nhớ:
+	lkblk
+	sudo mount /dev/sdX1 $HOME/bootfs
+	sudo mount /dev/sdX2 $HOME/rootfs
+	sudo umount /dev/sdX

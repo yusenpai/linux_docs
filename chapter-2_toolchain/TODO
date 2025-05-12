@@ -1,0 +1,42 @@
+0. Yêu cầu kỹ thuật
+	$ sudo apt-get install autoconf automake bison bzip2 cmake \
+	flex g++ gawk gcc
+	gettext git gperf help2man libncurses5-dev libstdc++6 libtool \
+	libtool-bin make
+	patch python3-dev rsync texinfo unzip wget xz-utils
+
+1. Giới thiệu về Toolchain:
+	- Toolchain là gì?: gồm các công cụ phát triển phần mềm (cho C/C++)
+	- Toolchain GNU có 3 thành phần chính:
+		- Binutils
+		- GCC
+		- C lib: glib / musl / uClib /...
+	- Có nhiều kiến trúc CPU khác nhau: x86, x86_64, arm, arm64
+	- Cross Toolchain: Toolchain chạy trên máy host, build ứng dụng cho một máy có kiến trúc khác host.
+	- Tên cái GCC của toolchain: aarch64-none-linux-gnu (cho kiến trúc arm64, none (không có vendor cụ thể), build cho linux)
+	- Tìm toolchain: người ta build sẵn, kiếm trên developer.arm.com, hoặc tự build một cái dùng crosstool-ng
+
+2. Thực hành build toolchain với crosstool-ng: 
+	- Cài đặt crosstool-ng
+		- clone về
+		- checkout 1.24
+		- cd vô thư mục, chạy ./bootstrap rồi ./configure --prefix=${PWD}
+		- make rồi make install
+	HOẶC sudo apt install crosstool-ng
+	- Cách sử dụng:
+		- ct-ng list-samples
+		- Chọn sample. Ví dụ: ct-ng aarch64-rpi4-linux-gnu
+		- Chỉnh sửa lại: vô ct-ng menuconfig
+		- Build: ct-ng build
+	- Toolchain cài trong ~/cross-toolchains, rồi export ra biến môi trường $PATH để sử dụng.
+
+3. Tải toolchain đã build sẵn
+	- Tải cross compiler từ [ARM](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads). 
+	- Giải nén, bỏ vào thư mục ~/cross-toolchains rồi sử dụng như thường.
+
+4. Các thành phần trong toolchain
+	- Tìm các thông tin về toolchain: gcc --version, gcc -v
+	- Sysroot, thư viện và header
+	- Các tool khác bên trong Toolchain
+
+5. Các thành phần trong thư viện 
