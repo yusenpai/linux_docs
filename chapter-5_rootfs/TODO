@@ -1,0 +1,6 @@
+Chương 5: Root filesystem (học trên máy ảo linux hoặc trên kit)
+- [ ] Root filesystem chứa những gì? (init, shell, daemon, shared lib, conf, dev, proc, sys, kernel module)
+- [ ] Filesystem Hierarchy Standard: gồm các thư mục nào ? Quyền hạn truy cập chuẩn POSIX
+- [ ] BusyBox: Giới thiệu, build. Các chương trình cho root fs: init (cấp với busybox), shell, utilities (echo,ls,cd,pwd,mkdir,rm,cp,mv,...)
+- [ ] Thư viện cho rootfs, Device node, Proc và sysfs
+- [ ] Tạo initramfs, chương trình init, user account, device node, network

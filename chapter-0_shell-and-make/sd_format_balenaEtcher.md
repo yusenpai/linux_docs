@@ -22,7 +22,7 @@ Gồm 3 bước thực hiện:
 2. Chọn thẻ SD
 3. Bắt đầu ghi
 
-![alt text](<./assets/Screenshot 2025-04-19 at 22.19.06.png>)
+<img src="assets/balena.png" width="800">
 
 ## Ví dụ: Tạo thẻ SD chứa hệ điều hành Raspberry Pi OS.
 
@@ -35,3 +35,11 @@ Bên trong thẻ SD có hai phân vùng:
 - `boot` (hoặc `bootfs`): Chiếm từ 50M - 1G, định dạng `FAT32`. Chứa những file cần thiết cho việc khởi tạo hệ thống, gồm: Linux kernel, device tree, initramfs,... Đối với Raspberry Pi 4 còn có thêm một số file khác như `bootcode.bin` `start4.elf` `fixup4.data`, tham khảo thêm ở https://www.raspberrypi.com/documentation/computers/configuration.html#boot-folder-content.
 
 - `rootfs`: Chiếm phần lớn thẻ nhớ, định dạng `ext4`. Phân vùng này chứa Root Filesystem.
+
+Bạn làm theo các bước sau:
+
+B1: Nhấn Flash from file, chọn file ảnh đĩa Raspberry Pi OS vừa tải về.
+
+B2: Chọn ổ đĩa là thẻ SD phù hợp.
+
+B3: Nhấn Flash để bắt đầu ghi ảnh đĩa lên thẻ.

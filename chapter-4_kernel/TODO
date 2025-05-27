@@ -1,0 +1,5 @@
+- [ ] Kernel làm gì ?
+- [ ] Chọn kernel
+- [ ] Build kernel: tải, cấu hình, biên dịch kernel, device tree, modules
+- [ ] Boot kernel: trên RPi4 hoặc BeagleBone Black (với UBoot)
+- [ ] Kernel panic

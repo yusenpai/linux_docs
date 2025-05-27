@@ -11,6 +11,7 @@
 		- [Giai đoạn 1: ROM Code](#giai-đoạn-1-rom-code)
 		- [Giai đoạn 2: Secondary Program Loader - SPL](#giai-đoạn-2-secondary-program-loader---spl)
 		- [Giai đoạn 3: Tertiary Program Loader - TPL](#giai-đoạn-3-tertiary-program-loader---tpl)
+	- [Từ bootloader sang kernel](#từ-bootloader-sang-kernel)
 
 ## Yêu cầu kiến thức
 
@@ -21,6 +22,7 @@
 - Kernel command line: dòng lệnh kernel
 - SPL: Secondary Program Loader
 - TPL: Tertiary Program Loader
+- Device Tree: chứa thông tin về h2ệ thống
 
 ## Bootloader làm gì?
 
@@ -34,7 +36,7 @@ Khi vừa cấp nguồn hoặc ngay sau khi nhấn nút RESET, hệ thống đan
 Quá trình khởi động hệ thống diễn ra qua nhiều giai đoạn. Bước cuối cùng của bootloader là **nạp kernel vào RAM và tạo môi trường khởi động cho nó**. Bootloader phải truyền cho kernel hai thông tin chính:
 
 - Thông tin về cấu hình phần cứng (TODO: có thể là device tree)
-- Dòng lệnh kernel (kernel command line)
+- Kernel command line
 
 Sau khi kernel khởi động, bootloader không còn cần thiết nữa, vùng nhớ nó sử dụng sẽ bị giải phóng.
 
@@ -54,7 +56,7 @@ ROM Code thường không khởi tạo DRAM Controller. Bộ nhớ RAM mà chư�
 
 Ở cuối giai đoạn ROM code, SPL đã được nạp sẵn vào SRAM và chờ thực thi.
 
-![rom_code](assets/rom_code.png)
+<img src="assets/rom_code.png" width="500">
 
 ### Giai đoạn 2: Secondary Program Loader - SPL
 
@@ -64,20 +66,34 @@ SPL là một đoạn chương trình lớn hơn ROM code, có thể thực hi�
 
 SPL thường không thể tương tác với người dùng. SPL được cung cấp sẵn từ hãng. Ở cuối giai đoạn này, TPL đã được nạp sẵn vào DRAM.
 
-![alt text](assets/spl.png)
+<img src="assets/spl.png" width="500">
 
 ### Giai đoạn 3: Tertiary Program Loader - TPL
 
 CPU nhảy tới thực thi chương trình TPL đã nạp trong DRAM.
 
-Đây là bootloader hoàn chỉnh, ví dụ như U-boot. TPL có thể có giao diện dòng lệnh đơn giản để giao tiếp với nó. Ta có thể nạp Linux kernel, device tree, initramfs vào DRAM để chuẩn bị khởi động Linux.
+Đây là bootloader hoàn chỉnh, ví dụ như U-boot. TPL có thể có giao diện dòng lệnh đơn giản để giao tiếp với nó. Ta có thể nạp 
 
-Ở cuối giai đoạn này, TPL phải truyền cho kernel Linux một số thông tin:
+- Linux kernel,
+- Device tree (chứa thông tin về hệ thống),
+- initramfs (tuỳ chọn),
+
+vào DRAM để chuẩn bị khởi động Linux.
+
+<img src="assets/tpl.png" width="500">
+
+## Từ bootloader sang kernel
+
+Trước khi kết thúc, Bootloader phải truyền cho kernel Linux một số thông tin:
 
 - Machine number: dành cho lõi ARM cũ không hỗ trợ device tree
 - Thông tin cơ bản về board, bao gồm kích thước và vị trí của RAM vật lý (DRAM) và tốc độ CPU.
 - Kernel command line
-- Device tree (tuỳ chọn)
-- initramfs (tuỳ chọn)
+- Vị trí và kích thước của Device Tree Binary (tuỳ chọn)
+- Vị trí và kích thước của RAM disk (còn gọi là initramfs) (tuỳ chọn)
 
-![alt text](assets/tpl.png)
+**Kernel command line** là một đoạn văn bản, điều khiển hoạt động của kernel. Ta sẽ xem xét kỹ hơn ở chương 4.
+
+**RAM disk** là một ổ đĩa chứa root filesystem. Ta sẽ học về RAM disk ở chương 5
+
+Bài tiếp theo, ta sẽ tìm hiểu về Device Tree: (TODO: link)
